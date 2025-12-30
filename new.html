@@ -1,99 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy New Year Madam Jii 🌻🎀</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🌻🎀 Surprise</title>
 
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #fff5f8, #fffdf5);
+    }
+
+    body {
+      height: 100vh;
+      background: #fff7fb;
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      text-align: center;
+    }
+
+    /* Moving emoji background */
+    .emoji-bg span {
+      position: absolute;
+      font-size: 24px;
+      animation: float 10s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh); }
+      100% { transform: translateY(-10vh); }
     }
 
     .card {
       background: white;
-      width: 90%;
-      max-width: 360px;
-      border-radius: 20px;
       padding: 25px;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    }
-
-    .emoji {
-      font-size: 32px;
-      margin-bottom: 10px;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 350px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      z-index: 10;
     }
 
     h1 {
-      font-size: 22px;
-      color: #333;
-      margin-bottom: 10px;
+      font-size: 28px;
+      margin-bottom: 15px;
+      color: #e91e63;
     }
 
     p {
-      font-size: 15px;
-      color: #555;
-      line-height: 1.6;
-      margin: 15px 0;
+      font-size: 16px;
+      margin-bottom: 20px;
+      color: #444;
     }
 
-    .name {
-      font-size: 18px;
-      font-weight: 600;
-      color: #e75480;
-      margin-top: 15px;
+    button {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 30px;
+      background: #ff69b4;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
     }
 
-    .from {
-      margin-top: 25px;
-      font-size: 14px;
-      color: #777;
+    .hidden {
+      display: none;
     }
 
-    .from span {
-      font-weight: 600;
-      color: #333;
+    /* Fireworks */
+    .firework {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: gold;
+      border-radius: 50%;
+      animation: explode 1s ease-out infinite;
+    }
+
+    @keyframes explode {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(6); opacity: 0; }
     }
   </style>
 </head>
 
 <body>
-  <div class="card">
-    <div class="emoji">🌻🎀</div>
 
-    <h1>Happy New Year, Madam Jii ✨</h1>
-
-    <p>
-      Naya saal tumhare liye  
-      khushiyon se bhara ho,<br>
-      har smile thodi aur pyari ho,<br>
-      aur har din thoda special ho 🌻
-    </p>
-
-    <p>
-      Tumhari presence hi kaafi hai  
-      din ko better banane ke liye,<br>
-      isliye socha…<br>
-      naye saal ki shuruaat  
-      thodi special tarike se karun 🎀
-    </p>
-
-    <div class="name">
-      — Priyanka 🌸
-    </div>
-
-    <div class="from">
-      With a smile,<br>
-      <span>Adii 😊</span>
-    </div>
+  <!-- Emoji background -->
+  <div class="emoji-bg">
+    <span style="left:10%">🌻</span>
+    <span style="left:30%">🎀</span>
+    <span style="left:50%">🌻</span>
+    <span style="left:70%">🎀</span>
+    <span style="left:90%">🌻</span>
   </div>
+
+  <!-- Main card -->
+  <div class="card">
+    <h1 id="title">Want a surprise? 👀</h1>
+    <p id="text">Tap the button below</p>
+    <button onclick="nextStep()">Next 🎀</button>
+  </div>
+
+  <script>
+    let step = 0;
+
+    function nextStep() {
+      const title = document.getElementById("title");
+      const text = document.getElementById("text");
+
+      if (step === 0) {
+        title.innerText = "Are you sure? 🤭";
+        text.innerText = "Once you click, there's no going back";
+      }
+
+      else if (step === 1) {
+        title.innerText = "🎆 HAPPY NEW YEAR 🎆";
+        title.style.fontSize = "34px";
+        text.innerText = "Madam jii 😊🎀";
+        launchFireworks();
+      }
+
+      else if (step === 2) {
+        title.innerText = "Kahi tari sangu ??? 🤫";
+        title.style.fontSize = "28px";
+        text.innerText = "";
+      }
+
+      else if (step === 3) {
+        title.innerText = "Rahu dya madam…";
+        text.innerText = "Nanter sangel 😁";
+      }
+
+      step++;
+    }
+
+    function launchFireworks() {
+      for (let i = 0; i < 20; i++) {
+        const f = document.createElement("div");
+        f.className = "firework";
+        f.style.left = Math.random() * 100 + "vw";
+        f.style.top = Math.random() * 100 + "vh";
+        document.body.appendChild(f);
+        setTimeout(() => f.remove(), 1000);
+      }
+    }
+  </script>
+
 </body>
 </html>
